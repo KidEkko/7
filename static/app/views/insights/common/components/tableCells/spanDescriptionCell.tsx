@@ -1,6 +1,7 @@
 import {Fragment, useMemo} from 'react';
 import styled from '@emotion/styled';
 
+import ClippedBox from 'sentry/components/clippedBox';
 import {Hovercard} from 'sentry/components/hovercard';
 import {t} from 'sentry/locale';
 import {space} from 'sentry/styles/space';
@@ -68,11 +69,17 @@ export function SpanDescriptionCell({
       <WiderHovercard
         position="right"
         body={
-          <FullSpanDescription
-            group={group}
-            shortDescription={rawDescription}
-            moduleName={moduleName}
-          />
+          <ClippedBox
+            clipHeight={300}
+            clipFlex={50}
+            btnText={t('Show Full Query')}
+          >
+            <FullSpanDescription
+              group={group}
+              shortDescription={rawDescription}
+              moduleName={moduleName}
+            />
+          </ClippedBox>
         }
       >
         {descriptionLink}
@@ -87,12 +94,18 @@ export function SpanDescriptionCell({
         body={
           <Fragment>
             <TitleWrapper>{t('Example')}</TitleWrapper>
-            <FullSpanDescription
-              group={group}
-              shortDescription={rawDescription}
-              moduleName={moduleName}
-              filters={spanOp ? {[SPAN_OP]: spanOp} : undefined}
-            />
+            <ClippedBox
+              clipHeight={300}
+              clipFlex={50}
+              btnText={t('Show Full Query')}
+            >
+              <FullSpanDescription
+                group={group}
+                shortDescription={rawDescription}
+                moduleName={moduleName}
+                filters={spanOp ? {[SPAN_OP]: spanOp} : undefined}
+              />
+            </ClippedBox>
           </Fragment>
         }
       >
